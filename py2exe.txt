@@ -1,4 +1,0 @@
-.py >> .exe
-
-pip install pyinstaller
-pyinstaller -F main.py -i img.ico
