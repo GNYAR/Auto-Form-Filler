@@ -1,16 +1,43 @@
 # Auto-Form-Filler
-- ePortal (NUTC)
-- ais (NTOU)
+
+## Versions
+
+- ePortal - NUTC (Python 3.7, Selenium ?)
+- ais - NTOU (Python 3.11, Selenium 4.7.2)
 
 ## Environment
+
 - Python
 - Selenium
 - Webdriver
-( [Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/) |
-[Chrome](https://chromedriver.chromium.org/downloads)
-)
+  ( [Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/) |
+  [Chrome](https://chromedriver.chromium.org/downloads) )
+
+## Build
+
+Check the program can be executed as expected first.
+
+```
+> pip install pyinstaller
+> pyinstaller -F <PROGRAM.py> -i <IMG.ico>
+```
+
+# ais - NTOU
+
+## Execute
+
+1. Put the web driver in the same directory as the program
+2. Set account and password at `line 17, 18`
+3. `python <PROGRAM.py>`
+
+> **IMPORTANT** | Need to enter the verify text in the terminal.
+
+# ePortal - NUTC
 
 ## Coding
+
+Old version (used in `ePortal.py`)
+
 ```
 # Import
 from selensium import webdriver
@@ -45,16 +72,9 @@ driver.switch_to.alert.accept() #確定
 driver.switch_to_window(driver.window_handles[註標值]) #註標值從0開始
 ```
 
-## Execute
-1. Put the web driver in the same directory as the program
-2. `python <PROGRAM.py>`
-
-## Build
-```
-> pip install pyinstaller
-> pyinstaller -F <PROGRAM.py> -i <IMG.ico>
-```
 ---
+
 ## References
+
 - [社團上課講義](https://hackmd.io/@5Tx96k0MTs6LBwHSE3bmHQ/SkmpHiwDr)
 - [Selenium Webdriver](https://www.selenium.dev/documentation/webdriver/)
