@@ -1,3 +1,4 @@
+from getpass import getpass
 from os import getcwd, system
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -14,18 +15,31 @@ driver = webdriver.Edge(options = options)
 
 # variables
 url = "https://ais.ntou.edu.tw"
-acc = "STUDENT_NUMBER"
-pw = "USER_PASSWORD"
 
 # open website
 driver.get(url)
 
 # login
-driver.find_element(By.NAME, "M_PORTAL_LOGIN_ACNT").send_keys(acc)
-driver.find_element(By.NAME, "M_PW").send_keys(pw)
-imgTxt = input("Enter the word in the image: ")
-driver.find_element(By.NAME, "M_PW2").send_keys(imgTxt)
-driver.find_element(By.NAME, "LGOIN_BTN").click()
+print("Login")
+fields = {
+  "M_PORTAL_LOGIN_ACNT": "",
+  "M_PW": "",
+  "M_PW2": ""
+}
+while(True):
+  fields["M_PORTAL_LOGIN_ACNT"] = input("Account: ")
+  fields["M_PW"] = getpass()
+  fields["M_PW2"] = input("Check: ")
+  for i in fields:
+    driver.find_element(By.NAME, i).clear()
+    driver.find_element(By.NAME, i).send_keys(fields[i])
+  driver.find_element(By.NAME, "LGOIN_BTN").click()
+  try:
+    driver.switch_to.alert.accept()
+    print("Wrong user input. Please retry\n")
+  except:
+    break
+print("Login successfully.\n")
 
 # go to menu
 driver.switch_to.frame("menuFrame")
