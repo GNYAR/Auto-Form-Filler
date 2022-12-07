@@ -52,12 +52,10 @@ def courseSelectionDrawing():
   driver.find_element(By.ID, "PC_ShowRows").click()
 
   sleep(3) # wait for change
-  
-  countXpath = "//td[text()='尚未抽籤']"
-  reorderColumn = "籤號"
 
-  count = len(driver.find_elements(By.XPATH, countXpath))
-  while (count > 0):
+  reorderColumn = "籤號"
+  count = len(driver.find_elements(By.XPATH, "//td[text()='尚未抽籤']"))
+  for _ in range(count):
     # reorder
     driver.find_element(By.PARTIAL_LINK_TEXT, reorderColumn).click()
     driver.find_element(By.PARTIAL_LINK_TEXT, reorderColumn).click()
@@ -67,8 +65,6 @@ def courseSelectionDrawing():
     # do lot
     driver.find_element(By.ID, "DoLot_BTN").click()
     sleep(10) # wait for change
-    # next
-    count = len(driver.find_elements(By.XPATH, countXpath))
 
 def funcMenu(funcs):
   print("Function Menu")
