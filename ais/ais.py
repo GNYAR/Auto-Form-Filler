@@ -40,6 +40,36 @@ def courseEvaluationSurvey():
     except:
       break
 
+def courseSelectionDrawing():
+  goToNode(["Menu_TreeViewt1", "Menu_TreeViewt30", "Menu_TreeViewt42"])
+  sleep(3) # wait for alert
+  driver.switch_to.alert.accept()
+  driver.switch_to.frame("mainFrame")
+
+  # show all rows
+  total = driver.find_element(By.ID, "PC_TotalRow").text
+  driver.find_element(By.ID, "PC_PageSize").send_keys(total)
+  driver.find_element(By.ID, "PC_ShowRows").click()
+
+  sleep(3) # wait for change
+  
+  countXpath = "//td[text()='尚未抽籤']"
+  reorderColumn = "籤號"
+
+  count = len(driver.find_elements(By.XPATH, countXpath))
+  while (count > 0):
+    # reorder
+    driver.find_element(By.PARTIAL_LINK_TEXT, reorderColumn).click()
+    driver.find_element(By.PARTIAL_LINK_TEXT, reorderColumn).click()
+    # select course
+    driver.find_element(By.LINK_TEXT, "詳").click() 
+    sleep(10) # wait for change
+    # do lot
+    driver.find_element(By.ID, "DoLot_BTN").click()
+    sleep(10) # wait for change
+    # next
+    count = len(driver.find_elements(By.XPATH, countXpath))
+
 def funcMenu(funcs):
   print("Function Menu")
   for i in funcs:
@@ -51,7 +81,7 @@ def goToNode(path):
   driver.switch_to.frame("menuFrame")
   for i in path:
     driver.find_element(By.ID, i).click()
-    sleep(1) # wait for animation
+    if (i != path[-1]): sleep(1) # wait for animation
   driver.switch_to.default_content()
 
 # variables
@@ -88,6 +118,11 @@ funcs = [
     "id": 1,
     "text": "Course Evaluation Survey",
     "func": courseEvaluationSurvey
+  },
+  {
+    "id": 2,
+    "text": "Course Selection Drawing",
+    "func": courseSelectionDrawing
   }
 ]
 selected = funcMenu(funcs)
