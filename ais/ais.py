@@ -71,12 +71,21 @@ def chageMainFrame(href):
   mainFrame = driver.find_element(By.NAME, "mainFrame")
   driver.execute_script("arguments[0].src='{0}'".format(href), mainFrame)
 
-def funcMenu(funcs):
-  print("Function Menu")
+def printFuncMenu(funcs):
+  printHeader("Function Menu")
   for i in funcs:
     print(str(i["id"]) + ".  " + i["text"])
   print("\n0.  Exit")
-  return int(input("Enter the number: "))
+  return int(input("\nWhich to do? (Enter the number)"))
+
+def printHeader(str):
+  n = 32
+  l = int((n - 2 - len(str)) / 2)
+  r = n - 2 - l - len(str)
+  print()
+  print("=" * n)
+  print("=", " " * l, str, " " * r, "=", sep="")
+  print("=" * n)
 
 # variables
 url = "https://ais.ntou.edu.tw"
@@ -85,7 +94,7 @@ url = "https://ais.ntou.edu.tw"
 driver.get(url)
 
 # login
-print("Login")
+printHeader("Login")
 fields = {
   "M_PORTAL_LOGIN_ACNT": "",
   "M_PW": "",
@@ -94,17 +103,18 @@ fields = {
 while(True):
   fields["M_PORTAL_LOGIN_ACNT"] = input("Account: ")
   fields["M_PW"] = getpass()
-  fields["M_PW2"] = input("Check: ")
+  fields["M_PW2"] = input("Captcha: ")
   for i in fields:
     driver.find_element(By.NAME, i).clear()
     driver.find_element(By.NAME, i).send_keys(fields[i])
+  print("\nLogin...")
   driver.find_element(By.NAME, "LGOIN_BTN").click()
   try:
     driver.switch_to.alert.accept()
-    print("Wrong user input. Please retry\n")
+    print("\nWrong user input. Please retry\n")
   except:
     break
-print("Login successfully.\n")
+print("\nLogin successfully.\n")
 
 # function menu
 funcs = [
@@ -119,16 +129,14 @@ funcs = [
     "func": courseSelectionDrawing
   }
 ]
-selected = funcMenu(funcs)
+selected = printFuncMenu(funcs)
 while(selected != 0):
-  filtered = [x for x in funcs if x["id"] == selected]
+  filtered = [x for x in funcs if x["id"] == selected][0]
   if len(filtered):
-    print("\nStart the function.")
-    filtered[0]["func"]()
-    print("Done! Please check.")
+    printHeader(filtered["text"])
+    filtered["func"]()
+    print("\nDone! Please check.\n")
     break
   else:
-    print("Bad input.\n")
-    funcMenu(funcs)
-
-system("pause")
+    print("\nBad input.\n")
+    printFuncMenu(funcs)
