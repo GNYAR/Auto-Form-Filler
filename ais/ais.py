@@ -107,14 +107,14 @@ while(True):
   for i in fields:
     driver.find_element(By.NAME, i).clear()
     driver.find_element(By.NAME, i).send_keys(fields[i])
-  print("\nLogin...")
+  print("\nLogin...", end="\r")
   driver.find_element(By.NAME, "LGOIN_BTN").click()
   try:
     driver.switch_to.alert.accept()
-    print("\nWrong user input. Please retry\n")
+    print("Wrong user input. Please retry\n")
   except:
     break
-print("\nLogin successfully.\n")
+print("Login successfully.\n")
 
 # function menu
 funcs = [
@@ -136,7 +136,7 @@ while(selected != 0):
     printHeader(filtered["text"])
     filtered["func"]()
     print("\nDone! Please check.\n")
-    break
+    printFuncMenu(funcs)
   else:
     print("\nBad input.\n")
     printFuncMenu(funcs)
