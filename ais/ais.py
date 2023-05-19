@@ -11,6 +11,7 @@ pre = {
   "download.default_directory": getcwd()
 }
 options.add_experimental_option("prefs", pre)
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
 driver = webdriver.Edge(options = options)
 
 # functions
