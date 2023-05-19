@@ -1,10 +1,5 @@
 # Auto-Form-Filler
 
-## Versions
-
-- ePortal - NUTC (Python 3.7, Selenium ?, Chrome)
-- ais - NTOU (Python 3.11, Selenium 4.7.2, Edge)
-
 ## Environment
 
 - Python
@@ -12,6 +7,11 @@
 - Webdriver
   ( [Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/) |
   [Chrome](https://chromedriver.chromium.org/downloads) )
+
+| Program Name   | Python | Selenium | Browser |
+| -------------- | ------ | -------- | ------- |
+| ePortal (NUTC) | 3.7    | ?        | Chrome  |
+| ais (NTOU)     | 3.11   | 4.7.2    | Edge    |
 
 ## Build
 
