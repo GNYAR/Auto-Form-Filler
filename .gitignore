@@ -1,2 +1,5 @@
 crack_captcha.exe
 msedgedriver.exe
+
+build
+*.spec

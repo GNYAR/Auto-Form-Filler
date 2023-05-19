@@ -1,10 +1,5 @@
 # Auto-Form-Filler
 
-## Versions
-
-- ePortal - NUTC (Python 3.7, Selenium ?)
-- ais - NTOU (Python 3.11, Selenium 4.7.2)
-
 ## Environment
 
 - Python
@@ -12,6 +7,11 @@
 - Webdriver
   ( [Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/) |
   [Chrome](https://chromedriver.chromium.org/downloads) )
+
+| Program Name   | Python | Selenium | Browser |
+| -------------- | ------ | -------- | ------- |
+| ePortal (NUTC) | 3.7    | ?        | Chrome  |
+| ais (NTOU)     | 3.11   | 4.7.2    | Edge    |
 
 ## Build
 
@@ -26,11 +26,10 @@ Check the program can be executed as expected first.
 
 ## Execute
 
-1. Put the web driver in the same directory as the program
-2. Set account and password at `line 17, 18`
-3. `python <PROGRAM.py>`
+1. Put the [Edge webdriver](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/) in the same directory as the program
+2. `python <PROGRAM.py>`
 
-> **IMPORTANT** | Need to enter the verify text in the terminal.
+> **IMPORTANT** | Need to input the login fields form the terminal.
 
 # ePortal - NUTC
 
