@@ -15,7 +15,7 @@ driver = webdriver.Edge(options = options)
 
 # functions
 def courseEvaluationSurvey():
-  goToNode(["Menu_TreeViewt1", "Menu_TreeViewt28", "Menu_TreeViewt39"])
+  chageMainFrame("Application/CET/CET20/CET2010_.aspx?progcd=CET2010")
   # loop
   while(True):
     try:
@@ -41,7 +41,7 @@ def courseEvaluationSurvey():
       break
 
 def courseSelectionDrawing():
-  goToNode(["Menu_TreeViewt1", "Menu_TreeViewt30", "Menu_TreeViewt42"])
+  chageMainFrame("Application/TKE/TKE20/TKE2020_.aspx?progcd=STU1020")
   sleep(3) # wait for alert
   driver.switch_to.alert.accept()
   driver.switch_to.frame("mainFrame")
@@ -66,19 +66,16 @@ def courseSelectionDrawing():
     driver.find_element(By.ID, "DoLot_BTN").click()
     sleep(10) # wait for change
 
+def chageMainFrame(href):
+  mainFrame = driver.find_element(By.NAME, "mainFrame")
+  driver.execute_script("arguments[0].src='{0}'".format(href), mainFrame)
+
 def funcMenu(funcs):
   print("Function Menu")
   for i in funcs:
     print(str(i["id"]) + ".  " + i["text"])
   print("\n0.  Exit")
   return int(input("Enter the number: "))
-
-def goToNode(path):
-  driver.switch_to.frame("menuFrame")
-  for i in path:
-    driver.find_element(By.ID, i).click()
-    if (i != path[-1]): sleep(1) # wait for animation
-  driver.switch_to.default_content()
 
 # variables
 url = "https://ais.ntou.edu.tw"
