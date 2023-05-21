@@ -80,7 +80,7 @@ def printFuncMenu(funcs):
   for i in funcs:
     print(str(i["id"]) + ".  " + i["text"])
   print("\n0.  Exit")
-  return int(input("\nWhich to do? (Enter the number)"))
+  return int(input("\nEnter the number: "))
 
 def printHeader(str):
   n = 32
@@ -139,8 +139,8 @@ while(selected != 0):
   if len(filtered):
     printHeader(filtered["text"])
     filtered["func"]()
+    driver.switch_to.default_content()
     print("\nDone! Please check.\n")
-    printFuncMenu(funcs)
   else:
     print("\nBad input.\n")
-    printFuncMenu(funcs)
+  selected = printFuncMenu(funcs)
