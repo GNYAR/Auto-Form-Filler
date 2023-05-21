@@ -61,11 +61,15 @@ def courseSelectionDrawing():
     driver.find_element(By.PARTIAL_LINK_TEXT, reorderColumn).click()
     driver.find_element(By.PARTIAL_LINK_TEXT, reorderColumn).click()
     # select course
+    name = driver.find_element(By.XPATH, "(//a[text()='詳'])[1]/parent::td/following-sibling::td[4]").text
+    print(name, "...", end="\r")
     driver.find_element(By.LINK_TEXT, "詳").click() 
     sleep(10) # wait for change
     # do lot
     driver.find_element(By.ID, "DoLot_BTN").click()
     sleep(10) # wait for change
+    n = driver.find_element(By.XPATH, "//td[text()='{0}']/following-sibling::td[3]".format(name)).text
+    print(name , n)
 
 def chageMainFrame(href):
   mainFrame = driver.find_element(By.NAME, "mainFrame")
@@ -76,7 +80,7 @@ def printFuncMenu(funcs):
   for i in funcs:
     print(str(i["id"]) + ".  " + i["text"])
   print("\n0.  Exit")
-  return int(input("\nWhich to do? (Enter the number)"))
+  return int(input("\nEnter the number: "))
 
 def printHeader(str):
   n = 32
@@ -135,8 +139,8 @@ while(selected != 0):
   if len(filtered):
     printHeader(filtered["text"])
     filtered["func"]()
+    driver.switch_to.default_content()
     print("\nDone! Please check.\n")
-    printFuncMenu(funcs)
   else:
     print("\nBad input.\n")
-    printFuncMenu(funcs)
+  selected = printFuncMenu(funcs)
